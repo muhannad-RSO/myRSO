@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل اختبار مسؤول الحماية من الإشعاع (RSO)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony Neutrals -->
+    <!-- Application Structure Plan: The application is structured into four logical, navigable sections (Introduction, Importance & Opportunities, Exam Topics, Prep Tips) rather than a linear document. This thematic approach, supported by a sticky navigation bar, allows physics graduates to quickly access the information most relevant to them. The core interaction model is "explore on demand"—users click to reveal details, such as job descriptions via the donut chart or exam topics via an accordion. This design was chosen to make a dense topic feel approachable and user-controlled, enhancing comprehension and engagement. -->
+    <!-- Visualization & Content Choices: 1. Job Sectors: (Report Info) -> (Goal) Show job distribution -> (Viz) Interactive Doughnut Chart -> (Interaction) Click slice to show sector details -> (Justification) Visualizes proportions better than text and encourages exploration -> (Library) Chart.js. 2. Exam Syllabus: (Report Info) -> (Goal) Organize dense topic list -> (Presentation) Accordion UI -> (Interaction) Click header to expand/collapse topics -> (Justification) Reduces cognitive load by hiding complexity until requested -> (Method) Vanilla JS. 3. RSO Duties: (Report Info) -> (Goal) Clarify core responsibilities -> (Presentation) Diagram built with HTML/CSS -> (Interaction) Subtle hover effects -> (Justification) A visual map is more memorable than a list -> (Method) HTML/Tailwind CSS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f8f7f4;
+            color: #333;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .active .accordion-content {
+            max-height: 500px;
+            transition: max-height 0.5s ease-in;
+        }
+        .active .accordion-icon {
+            transform: rotate(180deg);
+        }
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(10px);
+            background-color: rgba(248, 247, 244, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-slate-800">
+
+    <header class="sticky-nav shadow-md">
+        <nav class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="text-xl font-bold text-sky-800">دليل RSO</div>
+                <div class="hidden md:flex space-x-8 space-x-reverse">
+                    <a href="#intro" class="hover:text-sky-600">ما هو RSO؟</a>
+                    <a href="#opportunities" class="hover:text-sky-600">الأهمية والفرص</a>
+                    <a href="#topics" class="hover:text-sky-600">مواضيع الاختبار</a>
+                    <a href="#tips" class="hover:text-sky-600">نصائح للتحضير</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+        
+        <section id="hero" class="text-center py-16">
+            <h1 class="text-4xl md:text-5xl font-bold text-sky-800 mb-4">الدليل الشامل لاختبار مسؤول الحماية من الإشعاع (RSO)</h1>
+            <p class="text-lg text-slate-600 max-w-3xl mx-auto">
+                بصفتك خريج فيزياء، تفتح لك شهادة RSO أبوابًا مهنية واسعة في أحد أهم المجالات الحيوية. هذا الدليل يوضح لك كل ما تحتاج لمعرفته للانطلاق في مسيرتك المهنية.
+            </p>
+        </section>
+
+        <section id="intro" class="py-12">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-sky-700">ما هو مسؤول الحماية من الإشعاع (RSO)؟</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-slate-600">
+                    مسؤول الحماية من الإشعاع (Radiation Safety Officer) هو الشخص المؤهل والمسؤول عن ضمان الاستخدام الآمن للمصادر المشعة والمواد النووية في منشأة ما، بما يتوافق مع لوائح هيئة الرقابة النووية والإشعاعية (NRRC). دوره محوري في حماية العاملين والجمهور والبيئة من مخاطر الإشعاع.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="text-4xl text-sky-600 mb-4">🖥️</div>
+                    <h3 class="text-xl font-bold mb-2">الرقابة والقياس</h3>
+                    <p class="text-slate-600">إجراء مسوحات إشعاعية دورية ومراقبة مستويات التعرض للعاملين.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="text-4xl text-sky-600 mb-4">👨‍🏫</div>
+                    <h3 class="text-xl font-bold mb-2">التدريب والتوعية</h3>
+                    <p class="text-slate-600">تدريب الموظفين على ممارسات العمل الآمنة وإجراءات الطوارئ الإشعاعية.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="text-4xl text-sky-600 mb-4">📋</div>
+                    <h3 class="text-xl font-bold mb-2">الامتثال للوائح</h3>
+                    <p class="text-slate-600">ضمان التزام المنشأة بجميع التشريعات واللوائح الصادرة عن الهيئة.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="text-4xl text-sky-600 mb-4">🚨</div>
+                    <h3 class="text-xl font-bold mb-2">الاستجابة للطوارئ</h3>
+                    <p class="text-slate-600">وضع خطط الطوارئ وإدارتها في حالة وقوع أي حادث إشعاعي.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="opportunities" class="py-12 bg-white rounded-xl shadow-lg my-12">
+             <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-sky-700">الأهمية والفرص الوظيفية</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-slate-600">
+                    تعتبر شهادة RSO بمثابة رخصة مهنية تزيد من تنافسيتك في سوق العمل. فهي تفتح لك آفاقًا وظيفية في قطاعات متنوعة تتطلب خبرات متخصصة في مجال الحماية من الإشعاع. استكشف توزيع الفرص في الرسم البياني التفاعلي أدناه.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="p-4">
+                    <div class="chart-container">
+                        <canvas id="jobSectorsChart"></canvas>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="text-2xl font-bold mb-4">تفاصيل القطاعات الوظيفية</h3>
+                    <p class="text-slate-600 mb-6">انقر على أي قطاع في الرسم البياني لعرض تفاصيل الفرص المتاحة فيه.</p>
+                    <div id="sectorDetails" class="bg-stone-100 p-6 rounded-lg min-h-[200px] transition-all duration-300">
+                        <h4 class="text-xl font-bold text-sky-800">اختر قطاعًا</h4>
+                        <p class="text-slate-700 mt-2">سيتم عرض المعلومات هنا.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="topics" class="py-12">
+             <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-sky-700">مواضيع الاختبار الرئيسية</h2>
+                 <p class="mt-4 max-w-2xl mx-auto text-slate-600">
+                    يغطي الاختبار مجموعة شاملة من المواضيع الأساسية لضمان إلمامك بجميع جوانب الحماية الإشعاعية. تم تقسيم المحتوى إلى أربعة محاور رئيسية، يمكنك تصفح تفاصيل كل محور بالضغط عليه.
+                </p>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-4" id="accordionContainer">
+                <div class="accordion-item bg-white rounded-lg shadow-md border border-slate-200">
+                    <button class="accordion-header w-full flex justify-between items-center p-5 text-right font-semibold">
+                        <span>⚛️ أساسيات الفيزياء الإشعاعية</span>
+                        <span class="accordion-icon transition-transform duration-300">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <ul class="p-5 pt-0 list-disc list-inside text-slate-600 space-y-2">
+                            <li>تركيب الذرة والنشاط الإشعاعي.</li>
+                            <li>أنواع الإشعاعات المؤينة وخصائصها (ألفا، بيتا، جاما، نيوترونات).</li>
+                            <li>التفاعلات بين الإشعاع والمادة.</li>
+                            <li>وحدات القياس الإشعاعي والكميات (النشاط، الجرعة الممتصة، الجرعة المكافئة).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item bg-white rounded-lg shadow-md border border-slate-200">
+                    <button class="accordion-header w-full flex justify-between items-center p-5 text-right font-semibold">
+                        <span>🧬 البيولوجيا الإشعاعية</span>
+                        <span class="accordion-icon transition-transform duration-300">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <ul class="p-5 pt-0 list-disc list-inside text-slate-600 space-y-2">
+                            <li>التأثيرات البيولوجية للإشعاع على المستوى الخلوي والجزيئي.</li>
+                            <li>التأثيرات الحتمية والعشوائية للإشعاع.</li>
+                            <li>مبادئ الحماية الإشعاعية الأساسية: الزمن، المسافة، التدريع (ALARA).</li>
+                            <li>حدود الجرعات الإشعاعية للعاملين والجمهور.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="accordion-item bg-white rounded-lg shadow-md border border-slate-200">
+                    <button class="accordion-header w-full flex justify-between items-center p-5 text-right font-semibold">
+                        <span>🛡️ أجهزة القياس والوقاية</span>
+                        <span class="accordion-icon transition-transform duration-300">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <ul class="p-5 pt-0 list-disc list-inside text-slate-600 space-y-2">
+                            <li>أنواع كواشف الإشعاع (عداد جايجر، الكواشف الوميضية، غرف التأين).</li>
+                            <li>أجهزة قياس الجرعات الشخصية (TLD, OSL).</li>
+                            <li>مبادئ تصميم الدروع الواقية من الإشعاع.</li>
+                            <li>التعامل مع المصادر المشعة وتخزينها بأمان.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item bg-white rounded-lg shadow-md border border-slate-200">
+                    <button class="accordion-header w-full flex justify-between items-center p-5 text-right font-semibold">
+                        <span>⚖️ اللوائح والتشريعات</span>
+                        <span class="accordion-icon transition-transform duration-300">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <ul class="p-5 pt-0 list-disc list-inside text-slate-600 space-y-2">
+                            <li>دور هيئة الرقابة النووية والإشعاعية (NRRC) في السعودية.</li>
+                            <li>اللوائح الوطنية المتعلقة بالحماية من الإشعاع.</li>
+                            <li>متطلبات ترخيص المنشآت والممارسات الإشعاعية.</li>
+                            <li>إدارة النفايات المشعة ونقل المواد المشعة.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tips" class="py-12">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-sky-700">نصائح ذهبية للتحضير للاختبار</h2>
+                 <p class="mt-4 max-w-2xl mx-auto text-slate-600">
+                    التحضير الجيد هو مفتاح النجاح. إليك بعض النصائح التي ستساعدك على التركيز في دراستك وتحقيق أفضل نتيجة ممكنة في الاختبار.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold text-sky-800 mb-3">📚 فهم المصادر الرسمية</h3>
+                    <p class="text-slate-600">اعتمد على المواد والمراجع التي توصي بها هيئة الرقابة النووية والإشعاعية والوكالة الدولية للطاقة الذرية (IAEA).</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold text-sky-800 mb-3">🧮 التركيز على الوحدات</h3>
+                    <p class="text-slate-600">تأكد من فهمك العميق للوحدات الإشعاعية المختلفة (Sv, Gy, Bq) والقدرة على التحويل بينها وحل المسائل المتعلقة بها.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold text-sky-800 mb-3">📝 حل نماذج أسئلة</h3>
+                    <p class="text-slate-600">ابحث عن اختبارات ونماذج أسئلة سابقة للتعرف على نمط الأسئلة وتدريب نفسك على إدارة وقت الاختبار بفعالية.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-white text-center p-6 mt-12">
+        <p>تم تصميم هذا الدليل من زميلكم لمساعدة خريجي قسم الفيزياء على فهم متطلبات شهادة RSO.</p>
+        <p>&copy; 2025 - بالتوفيق في رحلتكم المهنية!</p>
+        <p>مصمم الدليل : مهند الصاعدي , احد خريجي قسم الفيزياء بجامعة طيبة RSO.</p>
+
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sectorData = {
+                'القطاع الصحي': {
+                    title: '🏨 القطاع الصحي',
+                    description: 'العمل في المستشفيات ومراكز الأورام لضمان السلامة في أقسام الأشعة التشخيصية، الطب النووي، والعلاج الإشعاعي. الدور يشمل مراقبة جرعات المرضى والعاملين وضمان معايرة الأجهزة.'
+                },
+                'القطاع الصناعي': {
+                    title: '🏭 القطاع الصناعي',
+                    description: 'العمل في المنشآت الصناعية التي تستخدم مصادر مشعة في تطبيقات مثل التصوير الإشعاعي الصناعي (NDT)، قياس الكثافة، ومراقبة العمليات. المسؤولية تشمل تأمين المصادر والتعامل الآمن معها.'
+                },
+                'البحث والأكاديميا': {
+                    title: '🔬 البحث والأكاديميا',
+                    description: 'العمل في الجامعات والمراكز البحثية التي تستخدم مسرعات الجسيمات أو المواد المشعة في الأبحاث العلمية. الدور يتضمن إدارة التراخيص والنفايات المشعة وتدريب الباحثين.'
+                },
+                'الجهات الحكومية': {
+                    title: '🏛️ الجهات الحكومية والتنظيمية',
+                    description: 'العمل لدى هيئة الرقابة النووية والإشعاعية أو جهات حكومية أخرى كمفتش أو مطور للوائح والسياسات لضمان تطبيق معايير السلامة الإشعاعية على المستوى الوطني.'
+                }
+            };
+            
+            const ctx = document.getElementById('jobSectorsChart').getContext('2d');
+            const jobSectorsChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['القطاع الصحي', 'القطاع الصناعي', 'البحث والأكاديميا', 'الجهات الحكومية'],
+                    datasets: [{
+                        label: 'توزيع الفرص الوظيفية',
+                        data: [45, 30, 15, 10],
+                        backgroundColor: [
+                            'rgba(56, 189, 248, 0.7)',
+                            'rgba(251, 146, 60, 0.7)',
+                            'rgba(74, 222, 128, 0.7)',
+                            'rgba(168, 85, 247, 0.7)'
+                        ],
+                        borderColor: [
+                            '#0284c7',
+                            '#f97316',
+                            '#16a34a',
+                            '#9333ea'
+                        ],
+                        borderWidth: 1.5,
+                        hoverOffset: 15
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    family: 'Tajawal',
+                                    size: 14
+                                }
+                            }
+                        },
+                        tooltip: {
+                            bodyFont: {
+                                family: 'Tajawal'
+                            },
+                            titleFont: {
+                                family: 'Tajawal'
+                            }
+                        }
+                    },
+                    onClick: (event, elements) => {
+                        if (elements.length > 0) {
+                            const chartElement = elements[0];
+                            const label = jobSectorsChart.data.labels[chartElement.index];
+                            updateSectorDetails(label);
+                        }
+                    }
+                }
+            });
+
+            const sectorDetailsContainer = document.getElementById('sectorDetails');
+            function updateSectorDetails(sector) {
+                const data = sectorData[sector];
+                if(data) {
+                    sectorDetailsContainer.innerHTML = `
+                        <h4 class="text-xl font-bold text-sky-800">${data.title}</h4>
+                        <p class="text-slate-700 mt-2">${data.description}</p>
+                    `;
+                }
+            }
+            updateSectorDetails('القطاع الصحي');
+
+
+            const accordionContainer = document.getElementById('accordionContainer');
+            accordionContainer.addEventListener('click', function(event) {
+                const header = event.target.closest('.accordion-header');
+                if (!header) return;
+                
+                const item = header.parentElement;
+                const wasActive = item.classList.contains('active');
+
+                accordionContainer.querySelectorAll('.accordion-item').forEach(el => {
+                    el.classList.remove('active');
+                });
+
+                if (!wasActive) {
+                    item.classList.add('active');
+                }
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
